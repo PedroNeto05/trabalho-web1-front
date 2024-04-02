@@ -12,7 +12,7 @@ body {
 .form-container {
   width: fit-content;
   margin: 1rem auto;
-  display: flex;
+  margin-bottom: 2rem;
 }
 
 .title-container,
@@ -25,10 +25,11 @@ body {
 
 .title-container input,
 .body-container textarea {
+  border: .0625rem solid #ffffff;
+
   padding: 1rem;
   width: 40rem;
   font-size: 1rem;
-  border: none;
   border-radius: 0.5rem;
   color: #ffffff;
   background-color: #3B3B3B;
@@ -51,15 +52,55 @@ body {
 
 .form-container button {
   font-size: 1.5rem;
+  border: .0625rem solid #ffffff;
   border-radius: 0.5rem;
   color: #ffffff;
-  background-color: #3B3B3B;
+  background-color: transparent;
   margin-top: 1rem;
   width: 100%;
   padding: 0.5rem;
 }
 
+.form-container button:hover {
+  background-color: #3B3B3B;
+}
+
+.form-container button:active {
+  opacity: 0.8;
+}
+
 .error {
   margin-top: 0.25rem;
   color: red;
+}
+
+.posts-container {
+  display: none;
+  overflow-y: auto;
+  border: .0625rem solid #ffffff;
+  background-color: #3B3B3B;
+  padding: 2rem;
+  width: fit-content;
+  height: 25rem;
+  margin: 1rem auto;
+}
+
+.posts-container::-webkit-scrollbar{
+  width: 10px;
+  background-color: #131516;
+}
+.posts-container::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+}
+
+.posts-container div {
+  
+  border: .0625rem solid #ffffff;
+  border-radius: 0.5rem;
+  width: 40rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  color: #ffffff;
+  background-color: #131516;
 }

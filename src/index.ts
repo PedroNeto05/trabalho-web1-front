@@ -19,6 +19,56 @@ interface ISubmitPost {
 interface IPosts {
   title: string;
   body: string;
+  id: string;
+}
+
+function createDeleteButton() {
+  const deleteButton = document.createElement('button');
+  deleteButton.classList.add('delete-button');
+  deleteButton.innerText = '🗑️';
+  return deleteButton;
+}
+
+function setPost(post: IPosts) {
+  const div = document.createElement('div');
+  const title = document.createElement('h3');
+  const body = document.createElement('p');
+  const divInvisível = document.createElement('div');
+  divInvisível.classList.add('post-id');
+  const divPost = document.createElement('div');
+  divPost.classList.add('div-post');
+  const divButtons = document.createElement('div');
+  divButtons.classList.add('div-buttons');
+  const deleteButton = createDeleteButton();
+  title.innerText = post.title;
+  body.innerText = post.body;
+  divInvisível.innerText = post.id;
+
+  divButtons.appendChild(deleteButton);
+  divPost.appendChild(title);
+  divPost.appendChild(body);
+  divPost.appendChild(divInvisível);
+  div.appendChild(divPost);
+  div.appendChild(divButtons);
+  postContainer.appendChild(div);
+}
+
+function createPost(postsJson: IPosts[]) {
+  postContainer.innerHTML = '';
+  postsJson.forEach(post => setPost(post));
+}
+
+async function getPosts() {
+  const posts = await fetch(BASEURL);
+  const postsJson = await posts.json();
+
+  if (postsJson.length >= 1) {
+    postContainer.style.display = 'block';
+  } else {
+    postContainer.style.display = 'none';
+  }
+
+  createPost(postsJson);
 }
 
 function setErrorMsg(error: string) {
@@ -45,37 +95,33 @@ async function submitPost(data: ISubmitPost) {
   }
 }
 
-function setPost(post: IPosts) {
-  const div = document.createElement('div');
-  const title = document.createElement('h3');
-  const body = document.createElement('p');
-  title.innerText = post.title;
-  body.innerText = post.body;
-  div.appendChild(title);
-  div.appendChild(body);
-  postContainer.appendChild(div);
-}
-
-function createPost(postsJson: IPosts[]) {
-  postContainer.innerHTML = '';
-  postsJson.forEach(post => setPost(post));
-}
-
-async function getPosts() {
-  const posts = await fetch(BASEURL);
-  const postsJson = await posts.json();
-
-  if (postsJson.length >= 1) {
-    postContainer.style.display = 'block';
-  }
-
-  createPost(postsJson);
+async function deletePost(id: string) {
+  const deleteOptions: RequestInit = {
+    method: 'DELETE',
+  };
+  await fetch(`${BASEURL}/${id}`, deleteOptions);
+  await getPosts();
 }
 
 window.addEventListener('load', getPosts);
 
 titleInput.addEventListener('input', () => {
   errorDiv.innerHTML = '';
+});
+
+document.addEventListener('click', e => {
+  /*
+  
+    Esses erros abaixo são do typescript, não achei outro jeito de fazer o delete do post e o método abaixo eu não consegui fazer a tipagem para que ele parrasse com esses erros
+
+  */
+
+  const { target } = e;
+  if (target.classList.contains('delete-button')) {
+    const deletedPost = target.parentElement.parentElement;
+    const id = deletedPost.querySelector('.post-id').innerText;
+    deletePost(id);
+  }
 });
 
 form?.addEventListener('submit', async e => {

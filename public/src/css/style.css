@@ -86,7 +86,7 @@ body {
 }
 
 .posts-container::-webkit-scrollbar{
-  width: 10px;
+  width: .625rem;
   background-color: #131516;
 }
 .posts-container::-webkit-scrollbar-thumb {
@@ -94,7 +94,9 @@ body {
   background-color: #ffffff;
 }
 
-.posts-container div {
+.posts-container > div {
+  position: relative;
+  display: flex;
   
   border: .0625rem solid #ffffff;
   border-radius: 0.5rem;
@@ -103,4 +105,15 @@ body {
   padding: 1rem;
   color: #ffffff;
   background-color: #131516;
+}
+
+.post-id {
+  display: none;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }

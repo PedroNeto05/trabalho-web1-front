@@ -20,7 +20,6 @@ body {
   color: #ffffff;
   display: flex;
   flex-direction: column;
-
 }
 
 .title-container input,
@@ -85,25 +84,24 @@ body {
   margin: 1rem auto;
 }
 
-.posts-container::-webkit-scrollbar{
+.posts-container::-webkit-scrollbar {
   width: .625rem;
   background-color: #131516;
 }
+
 .posts-container::-webkit-scrollbar-thumb {
   border-radius: 0.5rem;
   background-color: #ffffff;
 }
 
-.posts-container > div {
-  position: relative;
-  display: flex;
-  
+.posts-container>div {
   border: .0625rem solid #ffffff;
   border-radius: 0.5rem;
   width: 40rem;
   margin-bottom: 1rem;
   padding: 1rem;
   color: #ffffff;
+  word-wrap: break-word;
   background-color: #131516;
 }
 
@@ -116,4 +114,21 @@ body {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  flex: 1;
+}
+
+.div-post {
+  flex: 1;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.div-post>div {
+  width: 100%;
+}
+
+.div-Inter {
+  display: flex;
+  width: 100%;
+  align-items: center;
 }

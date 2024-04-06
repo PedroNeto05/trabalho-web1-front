@@ -30,26 +30,29 @@ function createDeleteButton() {
 }
 
 function setPost(post: IPosts) {
+  const divInter = document.createElement('div');
+  divInter.classList.add('div-Inter');
   const div = document.createElement('div');
   const title = document.createElement('h3');
-  const body = document.createElement('p');
+  const body = document.createElement('div');
   const divInvisível = document.createElement('div');
   divInvisível.classList.add('post-id');
-  const divPost = document.createElement('div');
-  divPost.classList.add('div-post');
-  const divButtons = document.createElement('div');
-  divButtons.classList.add('div-buttons');
+  const spanPost = document.createElement('span');
+  spanPost.classList.add('div-post');
+  const spanButtons = document.createElement('span');
+  spanButtons.classList.add('div-buttons');
   const deleteButton = createDeleteButton();
   title.innerText = post.title;
   body.innerText = post.body;
   divInvisível.innerText = post.id;
 
-  divButtons.appendChild(deleteButton);
-  divPost.appendChild(title);
-  divPost.appendChild(body);
-  divPost.appendChild(divInvisível);
-  div.appendChild(divPost);
-  div.appendChild(divButtons);
+  spanButtons.appendChild(deleteButton);
+  spanPost.appendChild(title);
+  spanPost.appendChild(body);
+  spanPost.appendChild(divInvisível);
+  divInter.appendChild(spanPost);
+  divInter.appendChild(spanButtons);
+  div.appendChild(divInter);
   postContainer.appendChild(div);
 }
 
